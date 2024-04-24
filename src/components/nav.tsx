@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { IconChevronDown } from '@tabler/icons-react'
+import { ChevronDownIcon } from '@radix-ui/react-icons'
 import { Button, buttonVariants } from './custom/button'
 import {
   Collapsible,
@@ -56,7 +56,7 @@ export default function Nav({
         <NavLinkDropdown {...rest} sub={sub} key={key} closeNav={closeNav} />
       )
 
-    return <NavLink {...rest} key={key} closeNav={closeNav} />
+    return <NavLink {...rest} key={key} closeIcon={false} closeNav={closeNav} />
   }
   return (
     <div
@@ -78,11 +78,14 @@ export default function Nav({
 interface NavLinkProps extends SideLink {
   subLink?: boolean
   closeNav: () => void
+  closeIcon?: boolean
 }
 
+// NavLink 展开的一级菜单样式
 function NavLink({
   title,
   icon,
+  closeIcon = false,
   label,
   href,
   closeNav,
@@ -96,14 +99,14 @@ function NavLink({
       className={cn(
         buttonVariants({
           variant: checkActiveNav(href) ? 'secondary' : 'ghost',
-          size: 'sm',
+          size: 'default',
         }),
-        'h-12 justify-start text-wrap rounded-none px-6',
-        subLink && 'h-10 w-full border-l border-l-slate-500 px-2'
+        'h-12 justify-start text-wrap secondary shadow-none px-6 mx-2',
+        subLink && 'h-10 w-full px-2'
       )}
       aria-current={checkActiveNav(href) ? 'page' : undefined}
     >
-      <div className='mr-2'>{icon}</div>
+      {!closeIcon && <div className='mr-2'>{icon}</div>}
       {title}
       {label && (
         <div className='ml-2 rounded-lg bg-primary px-1 text-[0.625rem] text-primary-foreground'>
@@ -114,6 +117,7 @@ function NavLink({
   )
 }
 
+// NavLinkDropdown 多级菜单样式
 function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
   const { checkActiveNav } = useCheckActiveNav()
 
@@ -125,8 +129,8 @@ function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
     <Collapsible defaultOpen={isChildActive}>
       <CollapsibleTrigger
         className={cn(
-          buttonVariants({ variant: 'ghost', size: 'sm' }),
-          'group h-12 w-full justify-start rounded-none px-6'
+          buttonVariants({ variant: 'ghost', size: 'default' }),
+          'group h-12 w-full justify-start secondary shadow-none px-6 mx-2'
         )}
       >
         <div className='mr-2'>{icon}</div>
@@ -141,14 +145,14 @@ function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
             'ml-auto transition-all group-data-[state="open"]:-rotate-180'
           )}
         >
-          <IconChevronDown stroke={1} />
+          <ChevronDownIcon stroke={"1"} />
         </span>
       </CollapsibleTrigger>
       <CollapsibleContent className='collapsibleDropdown' asChild>
         <ul>
           {sub!.map((sublink) => (
-            <li key={sublink.title} className='my-1 ml-8'>
-              <NavLink {...sublink} subLink closeNav={closeNav} />
+            <li key={sublink.title} className='my-1 ml-10'>
+              <NavLink {...sublink} subLink closeIcon={true} closeNav={closeNav} />
             </li>
           ))}
         </ul>
@@ -157,6 +161,7 @@ function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
   )
 }
 
+// NavLinkIcon 点击缩放的一级菜单
 function NavLinkIcon({ title, icon, label, href }: NavLinkProps) {
   const { checkActiveNav } = useCheckActiveNav()
   return (
@@ -186,6 +191,7 @@ function NavLinkIcon({ title, icon, label, href }: NavLinkProps) {
   )
 }
 
+// NavLinkIconDropdown 点击缩放菜单时候的样式
 function NavLinkIconDropdown({ title, icon, label, sub }: NavLinkProps) {
   const { checkActiveNav } = useCheckActiveNav()
 
@@ -212,8 +218,7 @@ function NavLinkIconDropdown({ title, icon, label, sub }: NavLinkProps) {
           {label && (
             <span className='ml-auto text-muted-foreground'>{label}</span>
           )}
-          <IconChevronDown
-            size={18}
+          <ChevronDownIcon
             className='-rotate-90 text-muted-foreground'
           />
         </TooltipContent>

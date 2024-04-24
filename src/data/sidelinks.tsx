@@ -41,19 +41,19 @@ export const sidelinks: SideLink[] = [
     icon: <IconLayoutDashboard size={18} />,
   },
   {
-    title: 'Tasks',
+    title: '任务管理',
     label: '3',
     href: '/tasks',
     icon: <IconChecklist size={18} />,
   },
   {
-    title: 'Chats',
+    title: '商品管理',
     label: '9',
     href: '/chats',
     icon: <IconMessages size={18} />,
   },
   {
-    title: 'Apps',
+    title: '应用管理',
     label: '',
     href: '/apps',
     icon: <IconApps size={18} />,
