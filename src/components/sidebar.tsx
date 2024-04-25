@@ -111,11 +111,11 @@ export default function Sidebar2({
           onClick={() => setIsCollapsed((prev) => !prev)}
           size='icon'
           variant='outline'
-          className='absolute -right-5 top-1/2 hidden rounded-full md:inline-flex'
+          className='absolute -right-3 top-12 hidden rounded-full md:inline-flex h-6 w-6'
         >
           <IconChevronsLeft
             stroke={1.5}
-            className={`h-5 w-5 ${isCollapsed ? 'rotate-180' : ''}`}
+            className={`h-4 w-4 ${isCollapsed ? 'rotate-180' : ''}`}
           />
         </Button>
       </Layout>
