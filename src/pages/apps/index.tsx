@@ -4,7 +4,7 @@ import {
   IconSortAscendingLetters,
   IconSortDescendingLetters,
 } from '@tabler/icons-react'
-import { Layout, LayoutBody, LayoutHeader } from '@/components/custom/layout'
+import { Layout, LayoutBody } from '@/components/custom/layout'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -14,9 +14,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
-import { Search } from '@/components/search'
-import ThemeSwitch from '@/components/theme-switch'
-import { UserNav } from '@/components/user-nav'
 import { Button } from '@/components/custom/button'
 import { apps } from './data'
 
@@ -48,16 +45,6 @@ export default function Apps() {
 
   return (
     <Layout fadedBelow fixedHeight>
-      {/* ===== Top Heading ===== */}
-      <LayoutHeader>
-        <div className='flex w-full items-center justify-between'>
-          <Search />
-          <div className='flex items-center space-x-4'>
-            <ThemeSwitch />
-            <UserNav />
-          </div>
-        </div>
-      </LayoutHeader>
 
       {/* ===== Content ===== */}
       <LayoutBody className='flex flex-col' fixedHeight>

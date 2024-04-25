@@ -36,6 +36,7 @@ const LayoutHeader = React.forwardRef<
     {...props}
   />
 ))
+
 LayoutHeader.displayName = 'LayoutHeader'
 
 interface LayoutBodyProps extends React.HTMLAttributes<HTMLDivElement> {
